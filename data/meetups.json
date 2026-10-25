@@ -1,0 +1,24 @@
+{
+  "_note": "SAMPLE dataset for the demo. Names are illustrative, NOT real organisations. Before the final demo, replace with real clubs/events you have verified (Meetup, Instagram groups, campus clubs).",
+  "city_default": "bengaluru",
+  "entries": [
+    {"id": "m1", "name": "Sunrise Park Walkers (sample)", "type": "walking club", "tags": ["walking", "social"], "city": "bengaluru", "weekday": 5, "time": "06:30", "indoor": false, "cost": "free"},
+    {"id": "m2", "name": "Weekend 5K Social Run (sample)", "type": "running club", "tags": ["running", "social"], "city": "bengaluru", "weekday": 6, "time": "06:30", "indoor": false, "cost": "free"},
+    {"id": "m3", "name": "Board Game Cafe Meetup (sample)", "type": "board games", "tags": ["board_games", "social"], "city": "bengaluru", "weekday": 5, "time": "17:00", "indoor": true, "cost": "cover charge"},
+    {"id": "m4", "name": "Community Yoga in the Hall (sample)", "type": "yoga", "tags": ["yoga", "social"], "city": "bengaluru", "weekday": 6, "time": "08:00", "indoor": true, "cost": "free"},
+    {"id": "m5", "name": "Sunday Cyclists Ride (sample)", "type": "cycling club", "tags": ["cycling", "social"], "city": "bengaluru", "weekday": 6, "time": "06:00", "indoor": false, "cost": "free"},
+    {"id": "m6", "name": "Open-Mic and Music Jam (sample)", "type": "music", "tags": ["music", "social"], "city": "bengaluru", "weekday": 5, "time": "18:30", "indoor": true, "cost": "free"},
+    {"id": "m7", "name": "Photo Walk Group (sample)", "type": "photography", "tags": ["photography", "walking", "social"], "city": "bengaluru", "weekday": 6, "time": "07:00", "indoor": false, "cost": "free"},
+    {"id": "m8", "name": "Book Club Evening (sample)", "type": "book club", "tags": ["books", "social"], "city": "bengaluru", "weekday": 5, "time": "16:00", "indoor": true, "cost": "free"},
+    {"id": "m9", "name": "Weekend Football Pickup (sample)", "type": "football", "tags": ["football", "social"], "city": "bengaluru", "weekday": 6, "time": "17:00", "indoor": false, "cost": "free"},
+    {"id": "m10", "name": "Neighbourhood Volunteer Clean-up (sample)", "type": "volunteering", "tags": ["walking", "social"], "city": "bengaluru", "weekday": 6, "time": "09:00", "indoor": false, "cost": "free"},
+    {"id": "d1", "name": "Heritage Garden Walk (sample)", "type": "walking club", "tags": ["walking", "photography", "social"], "city": "delhi", "weekday": 6, "time": "07:00", "indoor": false, "cost": "free"},
+    {"id": "d2", "name": "Indoor Board Games Night (sample)", "type": "board games", "tags": ["board_games", "social"], "city": "delhi", "weekday": 5, "time": "18:00", "indoor": true, "cost": "cover charge"},
+    {"id": "d3", "name": "Community Yoga Hall (sample)", "type": "yoga", "tags": ["yoga", "social"], "city": "delhi", "weekday": 6, "time": "08:00", "indoor": true, "cost": "free"},
+    {"id": "d4", "name": "Book Club Evening (sample)", "type": "book club", "tags": ["books", "social"], "city": "delhi", "weekday": 5, "time": "16:30", "indoor": true, "cost": "free"},
+    {"id": "b1", "name": "Seaside Walk Group (sample)", "type": "walking club", "tags": ["walking", "social"], "city": "mumbai", "weekday": 6, "time": "06:30", "indoor": false, "cost": "free"},
+    {"id": "b2", "name": "Board Game Cafe Meetup (sample)", "type": "board games", "tags": ["board_games", "social"], "city": "mumbai", "weekday": 5, "time": "17:00", "indoor": true, "cost": "cover charge"},
+    {"id": "b3", "name": "Sunday Cyclists Ride (sample)", "type": "cycling club", "tags": ["cycling", "social"], "city": "mumbai", "weekday": 6, "time": "06:00", "indoor": false, "cost": "free"},
+    {"id": "b4", "name": "Open-Mic and Music Jam (sample)", "type": "music", "tags": ["music", "social"], "city": "mumbai", "weekday": 5, "time": "18:30", "indoor": true, "cost": "free"}
+  ]
+}

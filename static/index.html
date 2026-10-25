@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CityPulse - weekly exposure planner</title>
+<style>
+  :root { --bg:#f6f7f9; --card:#fff; --ink:#1c2430; --mute:#667085; --line:#e4e7ec; --accent:#0f766e; --warn:#b45309; --bad:#b42318; }
+  * { box-sizing: border-box; }
+  body { margin:0; font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; background:var(--bg); color:var(--ink); }
+  header { background:#0b3d3a; color:#fff; padding:18px 20px; }
+  header h1 { margin:0; font-size:22px; } header p { margin:4px 0 0; opacity:.85; font-size:14px; }
+  main { max-width:1050px; margin:0 auto; padding:16px; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:16px; margin-bottom:14px; }
+  .controls { display:flex; flex-wrap:wrap; gap:12px; align-items:flex-end; }
+  label { font-size:12px; color:var(--mute); display:block; margin-bottom:4px; }
+  select, button, input[type=text] { font:inherit; padding:8px 10px; border-radius:8px; border:1px solid var(--line); background:#fff; }
+  button.primary { background:var(--accent); color:#fff; border-color:var(--accent); cursor:pointer; font-weight:600; }
+  button.small { padding:4px 10px; font-size:13px; cursor:pointer; margin-left:6px; }
+  button.ok { border-color:#16a34a; color:#166534; } button.no { border-color:#d92d20; color:#b42318; }
+  button:disabled { opacity:.5; cursor:default; }
+  .grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap:12px; }
+  .tile { border:1px solid var(--line); border-radius:10px; padding:12px; }
+  .tile .v { font-size:24px; font-weight:700; } .tile .k { font-size:12px; color:var(--mute); }
+  .good { color:#166534; } .bad { color:var(--bad); }
+  h2 { font-size:16px; margin:0 0 10px; }
+  .row { display:flex; justify-content:space-between; align-items:center; padding:8px 0; border-bottom:1px solid var(--line); gap:8px; }
+  .row:last-child { border-bottom:none; } .mute { color:var(--mute); font-size:13px; }
+  .tag { font-size:11px; padding:2px 8px; border-radius:999px; background:#e6f4f1; color:#0f766e; margin-left:6px; }
+  .tag.warn { background:#fef3c7; color:var(--warn); }
+  pre.summary { white-space:pre-wrap; font-family:inherit; margin:0; line-height:1.5; }
+  .heat { display:grid; grid-template-columns: 56px repeat(24, 1fr); gap:2px; font-size:10px; }
+  .heat .cell { height:20px; border-radius:3px; background:#f1f5f9; }
+  .heat .cell.w { outline:2px solid #0f766e; outline-offset:-2px; }
+  .heat .lbl { color:var(--mute); line-height:20px; text-align:center; }
+  .legend { font-size:12px; color:var(--mute); margin-top:8px; }
+  #chatlog div { margin:6px 0; padding:8px 10px; border-radius:8px; background:#f1f5f9; white-space:pre-wrap; }
+  #chatlog div.me { background:#e6f4f1; } #chatlog div.safe { background:#fee4e2; border:1px solid #fda29b; }
+  .hidden { display:none; }
+</style>
+</head>
+<body>
+<header>
+  <h1>CityPulse</h1>
+  <p>An agent that turns your week of heat, UV and PM2.5 exposure into healthier next-week actions. Guidance only - not medical advice.</p>
+</header>
+<main>
+  <div class="card">
+    <div class="controls">
+      <div><label for="persona">Persona (simulated week)</label><select id="persona"></select></div>
+      <div><label for="city">City</label><select id="city"></select></div>
+      <div><label for="lang">Language</label><select id="lang"></select></div>
+      <div><label><input type="checkbox" id="live" checked> Try live Open-Meteo data</label></div>
+      <div><label><input type="checkbox" id="llm"> LLM agent mode (needs API key)</label></div>
+      <div><button class="primary" id="go">Generate plan</button></div>
+    </div>
+    <div class="mute" id="status" style="margin-top:10px"></div>
+  </div>
+
+  <div id="results" class="hidden">
+    <div class="card"><h2>This week at a glance</h2><div class="grid" id="tiles"></div></div>
+    <div class="card"><h2>Weekly report</h2><pre class="summary" id="summary"></pre></div>
+    <div class="card">
+      <h2>When are you exposed? (hour-by-hour)</h2>
+      <div class="heat" id="heat"></div>
+      <div class="legend">Darker = more exposure (PM2.5 + heat + UV, weighted by how outdoors you are). Green outline = workout slot added by the agent.</div>
+    </div>
+    <div class="card"><h2>Workout slots <span class="mute">(accept or skip - the agent learns from this)</span></h2><div id="workouts"></div>
+      <p><a id="ics" href="#">Download calendar file (.ics)</a> <span class="mute">- open it to add the slots to Google/Apple/Outlook calendar</span></p></div>
+    <div class="card"><h2>Lower-exposure route and timing swaps</h2><div id="swaps"></div></div>
+    <div class="card"><h2>Long sitting blocks</h2><div id="gaps"></div></div>
+    <div class="card" id="meetcard"><h2>Clubs and meetups</h2><div id="meetups"></div></div>
+  </div>
+
+  <div class="card">
+    <h2>Ask the agent</h2>
+    <div id="chatlog"></div>
+    <div class="controls" style="margin-top:8px">
+      <input type="text" id="msg" placeholder="e.g. when are my workouts?" style="flex:1; min-width:220px">
+      <button id="send">Send</button>
+    </div>
+  </div>
+</main>
+<script src="/static/app.js"></script>
+</body>
+</html>

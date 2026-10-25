@@ -1,0 +1,10 @@
+fastapi>=0.110
+uvicorn[standard]>=0.29
+requests>=2.31
+httpx>=0.27
+pytest>=8.0
+# Optional: only needed for the LLM (Claude) agent mode. The app works without it.
+anthropic>=0.40
+# Optional: only needed for real Google Calendar insertion (the .ics export works without it).
+# google-api-python-client
+# google-auth-oauthlib
